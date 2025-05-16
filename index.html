@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Monitoring Kualitas Air</title>
-  <script src="script.js"></script>
+  <script type="module" src="script.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -95,7 +95,7 @@
 </head>
 <body>
   <div class="sidebar">
-    <h2>AquaSense</h2>
+    <h2>RSV Emas</h2>
     <a href="#">Dashboard</a>
     <a href="#">Monitoring</a> 
     <a href="#">History</a>
@@ -105,33 +105,29 @@
   <div class="main">
     <div class="header">
       <h1>Monitoring Kualitas Air</h1>
-      <p>Terakhir diperbarui: --</p>
+      <p>Terakhir diperbarui: <span id="timestamp">--</span></p>
     </div>
     
     <div class="grid">
       <div class="card">
         <h2>Ultrasonik</h2>
-        <p>-- <span class="unit">cm</span></p>
+        <p id="ultrasonik">-- <span class="unit">cm</span></p>
       </div>
       <div class="card">
         <h2>pH</h2>
-        <p>--</p>
+        <p id="ph">--</p>
       </div>
       <div class="card">
         <h2>Salinitas</h2>
-        <p>-- <span class="unit">ppm</span></p>
+        <p id="tds">-- <span class="unit">ppm</span></p>
       </div>
       <div class="card">
         <h2>Oksigen</h2>
-        <p>-- <span class="unit">mg/L</span></p>
+        <p id="oksigen">-- <span class="unit">mg/L</span></p>
       </div>
       <div class="card">
         <h2>Suhu</h2>
-        <p>-- <span class="unit">°C</span></p>
-      </div>
-      <div class="card">
-        <h2>Kekeruhan</h2>
-        <p>-- <span class="unit">NTU</span></p>
+        <p id="suhu">-- <span class="unit">°C</span></p>
       </div>
     </div>
   </div>
