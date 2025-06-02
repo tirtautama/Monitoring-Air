@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>History Data Monitoring</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f2f6fc, #e6ecf3);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+    }
+    .sidebar {
+      width: 240px;
+      background: #0d3b66;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.1);
+    }
+    .sidebar h2 {
+      font-size: 24px;
+      margin-bottom: 40px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffd700, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      margin: 15px 0;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      border-radius: 12px;
+      transition: background 0.3s, padding-left 0.3s, box-shadow 0.3s;
+    }
+    .sidebar a i {
+      margin-right: 10px;
+      color: #ffd700; /* warna emas */
+      width: 20px;
+      text-align: center;
+    }
+    .sidebar a:hover {
+      background: #005f99;
+      padding-left: 26px;
+      box-shadow: inset 4px 0 #ffd700;
+    }
+    .main {
+      flex: 1;
+      padding: 40px;
+    }
+    .header {
+      margin-bottom: 30px;
+    }
+    .header h1 {
+      font-size: 34px;
+      color: #007acc;
+      font-weight: 600;
+      position: relative;
+    }
+    .header h1::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: #ffd700;
+      border-radius: 2px;
+      margin-top: 8px;
+    }
+    .header p {
+      color: #555;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .tab-buttons {
+      margin-bottom: 20px;
+    }
+    .tab-buttons button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #007acc;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .tab-buttons button:hover {
+      background: #005f99;
+    }
+    .button {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 12px 24px;
+      background-color: #007acc;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .button:hover {
+      background-color: #005f99;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background: #f0f0f0;
+    }
+     footer {
+      height: 40px;
+      background-color: rgba(13, 59, 102, 0.2);
+      backdrop-filter: blur(6px);
+      color: #130101;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      position: fixed;
+      bottom: 0;
+      left: 240px;
+      right: 0;
+      z-index: 10;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>
+        <a href="index.html" style="color: inherit; text-decoration: none;">RSV Emas</a>
+      </h2>
+      <a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="monitoring.html"><i class="fas fa-tachometer-alt"></i> Monitoring</a>
+      <a href="history.html"><i class="fas fa-history"></i> History</a>
+      <a href="settings.html"><i class="fas fa-book"></i> Edukasi</a>
+    </div>
+
+    <div class="main">
+      <div class="header">
+        <h1>History Data Monitoring</h1>
+        <p>Menampilkan data kualitas air dari spreadsheet (Hari Ini & 7 Hari Terakhir).</p>
+      </div>
+
+      <div class="tab-buttons">
+        <button onclick="showToday()">Hari Ini</button>
+        <button onclick="showLast7Days()">7 Hari Terakhir</button>
+        <a
+          class="button"
+          href="https://docs.google.com/spreadsheets/d/1VNJZ-fhs-7SZb6M8PE0fcrQebiuAXDxQH6-j5tGcFUQ/edit?usp=sharing"
+          target="_blank"
+          >Buka Spreadsheet</a
+        >
+      </div>
+
+      <table id="history-table">
+        <thead>
+          <tr>
+            <th>Tanggal</th>
+            <th>Ultrasonik (cm)</th>
+            <th>pH</th>
+            <th>Salinitas (ppm)</th>
+            <th>Oksigen (mg/L)</th>
+            <th>Suhu (°C)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data akan dimasukkan lewat JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 RSV Emas.
+  </footer>
+
+  <script>
+    const data = [
+      { date: '2025-05-25', ultrasonik: 10, ph: 7, tds: 500, oksigen: 6, suhu: 28 },
+      { date: '2025-05-24', ultrasonik: 11, ph: 6.8, tds: 510, oksigen: 6.2, suhu: 27 },
+      { date: '2025-05-23', ultrasonik: 9, ph: 7.1, tds: 490, oksigen: 6.1, suhu: 28 },
+      { date: '2025-05-22', ultrasonik: 10, ph: 7, tds: 500, oksigen: 6, suhu: 28 },
+      { date: '2025-05-21', ultrasonik: 11, ph: 6.9, tds: 505, oksigen: 6.3, suhu: 27 },
+      { date: '2025-05-20', ultrasonik: 10, ph: 7, tds: 500, oksigen: 6, suhu: 28 },
+      { date: '2025-05-19', ultrasonik: 12, ph: 7.2, tds: 495, oksigen: 6.4, suhu: 27 }
+    ];
+
+    function renderTable(filteredData) {
+      const tbody = document.querySelector('#history-table tbody');
+      tbody.innerHTML = '';
+      filteredData.forEach((item) => {
+        const row = `<tr>
+          <td>${item.date}</td>
+          <td>${item.ultrasonik}</td>
+          <td>${item.ph}</td>
+          <td>${item.tds}</td>
+          <td>${item.oksigen}</td>
+          <td>${item.suhu}</td>
+        </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    function showToday() {
+      const today = new Date().toISOString().slice(0, 10);
+      const todayData = data.filter((item) => item.date === today);
+      renderTable(todayData);
+    }
+
+    function showLast7Days() {
+      const last7Days = data.slice(0, 7);
+      renderTable(last7Days);
+    }
+
+    // Tampilkan data default 7 hari terakhir saat halaman dibuka
+    showLast7Days();
+  </script>
+</body>
+</html>

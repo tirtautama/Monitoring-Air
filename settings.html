@@ -3,9 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Monitoring Kualitas Air</title>
-  <script type="module" src="script.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <title>Edukasi | RSV Emas</title>
   <!-- FontAwesome CDN -->
   <link
     rel="stylesheet"
@@ -13,6 +11,7 @@
     crossorigin="anonymous"
     referrerpolicy="no-referrer"
   />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -23,9 +22,9 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to right, #f2f6fc, #e6ecf3);
       display: flex;
+      flex-direction: column;
       min-height: 100vh;
       color: #333;
-      flex-direction: column;
     }
     .sidebar {
       width: 240px;
@@ -65,7 +64,7 @@
     .sidebar a i {
       margin-right: 10px;
       font-size: 18px;
-      color: #ffd700; /* gold color icon */
+      color: #ffd700;
       flex-shrink: 0;
       width: 20px;
       text-align: center;
@@ -101,10 +100,11 @@
       color: #555;
       font-size: 14px;
       margin-top: 10px;
+      max-width: 600px;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 24px;
       margin-top: 20px;
     }
@@ -117,6 +117,7 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
       overflow: hidden;
+      cursor: default;
     }
     .card:hover {
       transform: translateY(-6px);
@@ -140,20 +141,15 @@
       font-weight: 600;
     }
     .card p {
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 16px;
       color: #333;
-    }
-    .unit {
-      font-size: 14px;
-      color: #888;
-      margin-left: 4px;
+      line-height: 1.4;
     }
     footer {
       height: 40px;
       background-color: rgba(13, 59, 102, 0.2);
       backdrop-filter: blur(6px);
-      color: #130101;
+      color: #0f0f0f;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -170,7 +166,7 @@
 </head>
 <body>
   <div class="sidebar">
-    <h2><a href="index.html" style="color: inherit; text-decoration: none;">RSV Emas</a></h2>
+    <h2><a href="index.html">RSV Emas</a></h2>
     <a href="dashboard.html"><i class="fas fa-chart-line"></i>Dashboard</a>
     <a href="monitoring.html"><i class="fas fa-tachometer-alt"></i>Monitoring</a>
     <a href="history.html"><i class="fas fa-history"></i>History</a>
@@ -179,30 +175,26 @@
 
   <div class="main">
     <div class="header">
-      <h1>Monitoring Kualitas Air</h1>
-      <p>Terakhir diperbarui: <span id="timestamp">--</span></p>
+      <h1>Setting Nilai Normal Parameter Air</h1>
+      <p>Pahami batas normal setiap parameter agar kualitas air dan ikan tetap optimal.</p>
     </div>
 
     <div class="grid">
       <div class="card">
-        <h2>Ultrasonik</h2>
-        <p id="ultrasonik">--<span class="unit">cm</span></p>
+        <h2>pH Air</h2>
+        <p>Nilai pH optimal: <strong>6.5 - 8.5</strong>. pH di luar rentang ini dapat mengganggu kesehatan ikan dan mikroorganisme.</p>
       </div>
       <div class="card">
-        <h2>pH</h2>
-        <p id="ph">--</p>
+        <h2>Salinitas</h2>
+        <p>Rentang normal: <strong>5 - 25 ppt</strong> (tergantung jenis ikan). Salinitas mempengaruhi osmoregulasi dan metabolisme ikan.</p>
       </div>
       <div class="card">
-        <h2>TDS</h2>
-        <p id="tds">--<span class="unit">ppm</span></p>
+        <h2>Oksigen Terlarut (DO)</h2>
+        <p>Kadar oksigen ideal: <strong>5 - 8 mg/L</strong>. Kekurangan oksigen dapat menyebabkan stres dan kematian ikan.</p>
       </div>
       <div class="card">
-        <h2>Oksigen</h2>
-        <p id="oksigen">--<span class="unit">mg/L</span></p>
-      </div>
-      <div class="card">
-        <h2>Suhu</h2>
-        <p id="suhu">--<span class="unit">°C</span></p>
+        <h2>Suhu Air</h2>
+        <p>Rentang suhu optimal: <strong>24°C - 30°C</strong>. Suhu yang terlalu tinggi atau rendah dapat menurunkan sistem imun ikan.</p>
       </div>
     </div>
   </div>
